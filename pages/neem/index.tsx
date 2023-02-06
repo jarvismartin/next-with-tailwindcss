@@ -30,6 +30,20 @@ export async function getServerSideProps() {
       Insurance: "Primary",
       id: "",
     },
+    {
+      covered: true,
+      name: { first: "Stacy", last: "Bell", preferred: "Stacy" },
+      subscriber: true,
+      Insurance: "Primary",
+      id: "",
+    },
+    {
+      covered: true,
+      name: { first: "Rebecca", last: "Bell", preferred: "Bella" },
+      subscriber: true,
+      Insurance: "",
+      id: "",
+    },
   ];
   return {
     props: { household },
