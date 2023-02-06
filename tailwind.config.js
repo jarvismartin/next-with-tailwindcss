@@ -6,13 +6,14 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
-    colors: {
-      primary: "#70C4BB",
-      purple: "#C985FF",
-      blue: "#5B8AF0",
-      orange: "#EB8F24",
-      lightgray: "#9DA7BE",
+    extend: {
+      colors: {
+        primary: "#70C4BB",
+        purple: "#C985FF",
+        blue: "#5B8AF0",
+        orange: "#EB8F24",
+        lightgray: "#9DA7BE",
+      },
     },
   },
   plugins: [],
