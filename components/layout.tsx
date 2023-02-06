@@ -9,6 +9,7 @@ import Footer from "../components/footer";
 
 // Fonts
 import { Inter, DM_Sans } from "@next/font/google";
+import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: "500" });
@@ -16,7 +17,11 @@ const dmSans = DM_Sans({ subsets: ["latin"], weight: "500" });
 const name = "Your Name";
 export const siteTitle = "Jarvism Next.js Site";
 
-export default function Layout({ children }) {
+interface Props {
+  children?: ReactNode;
+  // any props that come into the component
+}
+export default function Layout({ children, ...props }: Props) {
   return (
     <div className={(styles.container, inter.className)}>
       <Head>
