@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "./layout.module.css";
 import Link from "next/link";
+import { ReactNode } from "react";
 
 // Components
 import Navbar from "../components/navbar";
@@ -9,7 +10,6 @@ import Footer from "../components/footer";
 
 // Fonts
 import { Inter, DM_Sans } from "@next/font/google";
-import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: "500" });
