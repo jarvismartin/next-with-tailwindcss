@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import { Rubik } from "@next/font/google";
 import InfoCircle from "./info_circle";
 import MemberRow from "./member_row";
@@ -9,7 +10,12 @@ const style = {
   fontFamily: rubik.style.fontFamily,
 };
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
+
   // Fake Fetch
   const household = [
     {
@@ -40,7 +46,7 @@ export async function getServerSideProps() {
   return {
     props: { household },
   };
-}
+};
 
 interface Props {
   // any props that come into the component
@@ -48,6 +54,10 @@ interface Props {
 }
 
 export default function Neem(props: Props) {
+  const MemberRows = props.household.map((member) => {
+    return <MemberRow member={member} key={member.uuid} />;
+  });
+
   // Input Handler
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("Member Row inputHandler event:", event);
@@ -70,10 +80,7 @@ export default function Neem(props: Props) {
           <div className="text-xs font-normal">Subscriber</div>
           <div className="text-xs font-normal">Insurance</div>
           <div className="text-xs font-normal">ID</div>
-          {/* <MemberRows household={[...props.household]} /> */}
-          {props.household.map((member) => {
-            return <MemberRow member={member} key={member.uuid} />;
-          })}
+          {MemberRows}
         </div>
       </div>
     </section>
