@@ -1,4 +1,4 @@
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { Rubik } from "@next/font/google";
 import InfoCircle from "./info_circle";
 import MemberRow from "./member_row";
@@ -10,47 +10,34 @@ const style = {
   fontFamily: rubik.style.fontFamily,
 };
 
-// export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-//   res.setHeader(
-//     "Cache-Control",
-//     "public, s-maxage=10, stale-while-revalidate=59"
-//   );
-
-//   // Fake Fetch
-const household = [
-  {
-    uuid: "a3bbc89c-a669-11ed-afa1-0242ac120002",
-    covered: true,
-    name: { first: "Jerome", last: "Bell", preferred: "Rome" },
-    subscriber: true,
-    insurance: "Primary",
-    id: "",
-  },
-  {
-    uuid: "bc39ff10-a669-11ed-afa1-0242ac120002",
-    covered: true,
-    name: { first: "Stacy", last: "Bell", preferred: "Stacy" },
-    subscriber: true,
-    insurance: "Primary",
-    id: "",
-  },
-  {
-    uuid: "c9b59794-a669-11ed-afa1-0242ac120002",
-    covered: false,
-    name: { first: "Rebecca", last: "Bell", preferred: "Becca" },
-    subscriber: true,
-    insurance: "",
-    id: "",
-  },
-];
-//   return {
-//     props: { household },
-//   };
-// };
-Neem.getStaticProps = async () => {
-  // Fake fetch
-  // const res = await fetch(url);
-  // const json = await res.json();
+export const getStaticProps: GetStaticProps = async () => {
+  // Fake Fetch
+  const household = [
+    {
+      uuid: "a3bbc89c-a669-11ed-afa1-0242ac120002",
+      covered: true,
+      name: { first: "Jerome", last: "Bell", preferred: "Rome" },
+      subscriber: true,
+      insurance: "Primary",
+      id: "",
+    },
+    {
+      uuid: "bc39ff10-a669-11ed-afa1-0242ac120002",
+      covered: true,
+      name: { first: "Stacy", last: "Bell", preferred: "Stacy" },
+      subscriber: true,
+      insurance: "Primary",
+      id: "",
+    },
+    {
+      uuid: "c9b59794-a669-11ed-afa1-0242ac120002",
+      covered: false,
+      name: { first: "Rebecca", last: "Bell", preferred: "Becca" },
+      subscriber: true,
+      insurance: "",
+      id: "",
+    },
+  ];
   return {
     props: { household },
   };
