@@ -1,6 +1,7 @@
 import { Rubik } from "@next/font/google";
 import InfoCircle from "./info_circle";
-import MemberRows from "./member_rows";
+import MemberRow from "./member_row";
+import { useState } from "react";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
@@ -48,33 +49,31 @@ interface Props {
 
 export default function Neem(props: Props) {
   // Input Handler
-  const inputHandler = (event: React.ChangeEventHandler) => {
-    console.log("event:", event);
-    return;
+  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("Member Row inputHandler event:", event);
   };
 
   return (
     <section
-      className="flex flex-1 flex-col items-center p-4 overflow-auto"
+      className="flex flex-1 flex-col items-center p-4 overflow-auto -tracking-2"
       style={style}
     >
-      <div className="flex flex-col w-full overflow-auto p-4">
-        <h3 className="text-xl font-semibold mb-4">Household</h3>
-        <div className="grid-container">
+      <div className="flex flex-col w-full overflow-auto">
+        <h3 className="text-base font-medium mb-4">Household</h3>
+        <div className="grid-container gap-4">
           {/* Column headers */}
-          <div className="flex ">
+          <div className="flex items-center text-xs font-normal">
             Covered
-            {/* hero icons information-circle */}
             <InfoCircle />
           </div>
-          <div className="">Name</div>
-          <div>Subscriber</div>
-          <div>Insurance</div>
-          <div>ID</div>
-          <MemberRows
-            household={[...props.household]}
-            inputHandler={inputHandler}
-          />
+          <div className="text-xs font-normal">Name</div>
+          <div className="text-xs font-normal">Subscriber</div>
+          <div className="text-xs font-normal">Insurance</div>
+          <div className="text-xs font-normal">ID</div>
+          {/* <MemberRows household={[...props.household]} /> */}
+          {props.household.map((member) => {
+            return <MemberRow member={member} key={member.uuid} />;
+          })}
         </div>
       </div>
     </section>

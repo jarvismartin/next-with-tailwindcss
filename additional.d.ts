@@ -7,6 +7,6 @@ interface HouseHoldMember {
     preferred: string;
   };
   subscriber: boolean;
-  insurance: "Primary" | "Secondary";
+  insurance: "Primary" | "Secondary" | "";
   id: string;
 }

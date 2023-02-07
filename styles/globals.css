@@ -38,3 +38,30 @@ main {
 .radio:checked {
   box-shadow: 0 0 0 4px #70c4bb inset, 0 0 0 4px #70c4bb inset;
 }
+
+input[type="checkbox"]:hover,
+input[type="radio"]:hover,
+input[type="checkbox"]:active,
+input[type="radio"]:active,
+input[type="checkbox"]:focus,
+input[type="radio"]:focus {
+  cursor: pointer;
+  outline: none;
+  border-color: #70c4bb;
+  /* background-color: #70c4bb; */
+  color: #70c4bb;
+  --tw-ring-color: #70c4bb;
+}
+
+input[type="text"],
+select {
+  border-width: 1px;
+  border-color: #eff1f5;
+  color: #263446;
+  cursor: pointer;
+}
+input[type="text"]:focus,
+select:focus {
+  --tw-ring-color: #70c4bb;
+  border-color: #70c4bb;
+}
