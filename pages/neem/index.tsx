@@ -1,8 +1,8 @@
-import { GetServerSideProps, GetStaticProps } from "next";
+// import { GetServerSideProps, GetStaticProps } from "next";
 import { Rubik } from "@next/font/google";
 import InfoCircle from "./info_circle";
 import MemberRow from "./member_row";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
@@ -10,46 +10,54 @@ const style = {
   fontFamily: rubik.style.fontFamily,
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  // Fake Fetch
-  const household = [
-    {
-      uuid: "a3bbc89c-a669-11ed-afa1-0242ac120002",
-      covered: true,
-      name: { first: "Jerome", last: "Bell", preferred: "Rome" },
-      subscriber: true,
-      insurance: "Primary",
-      id: "",
-    },
-    {
-      uuid: "bc39ff10-a669-11ed-afa1-0242ac120002",
-      covered: true,
-      name: { first: "Stacy", last: "Bell", preferred: "Stacy" },
-      subscriber: true,
-      insurance: "Primary",
-      id: "",
-    },
-    {
-      uuid: "c9b59794-a669-11ed-afa1-0242ac120002",
-      covered: false,
-      name: { first: "Rebecca", last: "Bell", preferred: "Becca" },
-      subscriber: true,
-      insurance: "",
-      id: "",
-    },
-  ];
-  return {
-    props: { household },
-  };
-};
+// export const getStaticProps: GetStaticProps = async () => {
+//   // Fake Fetch
+// Stub data
+const household = [
+  {
+    uuid: "a3bbc89c-a669-11ed-afa1-0242ac120002",
+    covered: true,
+    name: { first: "Jerome", last: "Bell", preferred: "Rome" },
+    subscriber: true,
+    insurance: "Primary",
+    id: "",
+  },
+  {
+    uuid: "bc39ff10-a669-11ed-afa1-0242ac120002",
+    covered: true,
+    name: { first: "Stacy", last: "Bell", preferred: "Stacy" },
+    subscriber: true,
+    insurance: "Primary",
+    id: "",
+  },
+  {
+    uuid: "c9b59794-a669-11ed-afa1-0242ac120002",
+    covered: false,
+    name: { first: "Rebecca", last: "Bell", preferred: "Becca" },
+    subscriber: true,
+    insurance: "",
+    id: "",
+  },
+];
+//   return {
+//     props: { household },
+//   };
+// };
 
-interface Props {
-  // any props that come into the component
-  household: Array<HouseHoldMember>;
-}
+// interface Props {
+//   // any props that come into the component
+//   household: Array<Member>;
+// }
 
-export default function Neem(props: Props) {
-  const MemberRows = props.household.map((member) => {
+export default function Neem() {
+  const [data, setData] = useState<Member[] | null>(null);
+
+  useEffect(() => {
+    // Fake Fetch
+    return setData(household);
+  });
+
+  const MemberRows = data?.map((member) => {
     return <MemberRow member={member} key={member.uuid} />;
   });
 

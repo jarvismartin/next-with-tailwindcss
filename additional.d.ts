@@ -1,4 +1,4 @@
-interface HouseHoldMember {
+interface Member {
   uuid: string;
   covered: boolean;
   name: {
@@ -7,6 +7,6 @@ interface HouseHoldMember {
     preferred: string;
   };
   subscriber: boolean;
-  insurance: "Primary" | "Secondary" | "";
+  insurance: string;
   id: string;
 }

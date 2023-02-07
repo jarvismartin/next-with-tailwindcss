@@ -1,15 +1,22 @@
-import { useState } from "react";
-import UserCircle from "./user_circle";
+import { useState, useEffect } from "react";
+// import UserCircle from "./user_circle";
 
 interface Props {
-  member: HouseHoldMember;
+  member: Member;
 }
 export default function MemberRows(props: Props) {
   console.log("MEMBER ROWS PROPS:", props);
-  const member = props.member;
+  const [member, setMember] = useState<Member>(props.member);
 
-  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("Member Row inputHandler event:", event);
+  // const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   console.log("Member Row inputHandler event:", event);
+  // };
+  const inputHandler = (member: Member, property: string, value: boolean) => {
+    console.log(member[property as keyof Member]);
+    let updateMember: Member = member;
+    updateMember[property as keyof Member] = value;
+
+    setMember(updateMember);
   };
 
   return (
@@ -19,7 +26,7 @@ export default function MemberRows(props: Props) {
           type="checkbox"
           checked={member.covered}
           className="checked:bg-primary rounded-md ml-8 border-2 border-lightgray"
-          onChange={inputHandler}
+          onChange={() => inputHandler(member, "covered", !member["covered"])}
           tabIndex={0}
         />
       </div>
@@ -33,7 +40,7 @@ export default function MemberRows(props: Props) {
         <span className="mr-2">{member.name.last}</span>
         <span className="text-lightgray">({member.name.preferred})</span>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center ml-6">
         <input
           type="radio"
           name="subscriber"
