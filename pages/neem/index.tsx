@@ -1,6 +1,6 @@
 import { Rubik } from "@next/font/google";
 import InfoCircle from "./info_circle";
-import UserCircle from "./user_circle";
+import MemberRows from "./member_rows";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
@@ -8,40 +8,31 @@ const style = {
   fontFamily: rubik.style.fontFamily,
 };
 
-interface User {
-  covered: boolean;
-  name: {
-    first: string;
-    last: string;
-    preferred: string;
-  };
-  subscriber: boolean;
-  insurance: "Primary" | "Secondary";
-  id: string;
-}
-
 export async function getServerSideProps() {
   // Fake Fetch
   const household = [
     {
+      uuid: "a3bbc89c-a669-11ed-afa1-0242ac120002",
       covered: true,
       name: { first: "Jerome", last: "Bell", preferred: "Rome" },
       subscriber: true,
-      Insurance: "Primary",
+      insurance: "Primary",
       id: "",
     },
     {
+      uuid: "bc39ff10-a669-11ed-afa1-0242ac120002",
       covered: true,
       name: { first: "Stacy", last: "Bell", preferred: "Stacy" },
       subscriber: true,
-      Insurance: "Primary",
+      insurance: "Primary",
       id: "",
     },
     {
-      covered: true,
-      name: { first: "Rebecca", last: "Bell", preferred: "Bella" },
+      uuid: "c9b59794-a669-11ed-afa1-0242ac120002",
+      covered: false,
+      name: { first: "Rebecca", last: "Bell", preferred: "Becca" },
       subscriber: true,
-      Insurance: "",
+      insurance: "",
       id: "",
     },
   ];
@@ -52,7 +43,7 @@ export async function getServerSideProps() {
 
 interface Props {
   // any props that come into the component
-  household: Array<User>;
+  household: Array<HouseHoldMember>;
 }
 
 export default function Neem(props: Props) {
@@ -62,39 +53,6 @@ export default function Neem(props: Props) {
     return;
   };
 
-  const listItems = props.household.map((member, i) => {
-    return (
-      <div key={i.toString()} className="flex flex-wrap w-full">
-        <div className="flex items-center w-3/12">
-          <input
-            type="checkbox"
-            checked={member.covered}
-            className="bg-primary ml-8"
-            onChange={inputHandler}
-          />
-        </div>
-        <div className="flex items-center w-4/12">
-          <span className="mr-2">
-            <UserCircle />
-          </span>
-          <span className="mr-2">{member.name.first}</span>
-          <span className="mr-2">{member.name.last}</span>
-          <span className="text-lightgray">({member.name.preferred})</span>
-        </div>
-        <div>
-          <input
-            type="radio"
-            name="radio-1"
-            className="radio bg-primary"
-            checked={member.subscriber ? true : false}
-          />
-        </div>
-        <div>{member.insurance}</div>
-        <div>{member.id}</div>
-      </div>
-    );
-  });
-
   return (
     <section
       className="flex flex-1 flex-col items-center p-4 overflow-auto"
@@ -102,21 +60,22 @@ export default function Neem(props: Props) {
     >
       <div className="flex flex-col w-full overflow-auto p-4">
         <h3 className="text-xl font-semibold mb-4">Household</h3>
-        <div className="flex flex-col py-4">
-          <div className="flex items-center">
-            {/* Column headers */}
-            <div className="flex items-center w-3/12">
-              Covered
-              {/* hero icons information-circle */}
-              <InfoCircle />
-            </div>
-            <div className="w-4/12">Name</div>
-            <div>Subscriber</div>
-            <div>Insurance</div>
-            <div>ID</div>
+        <div className="grid-container">
+          {/* Column headers */}
+          <div className="flex ">
+            Covered
+            {/* hero icons information-circle */}
+            <InfoCircle />
           </div>
+          <div className="">Name</div>
+          <div>Subscriber</div>
+          <div>Insurance</div>
+          <div>ID</div>
+          <MemberRows
+            household={[...props.household]}
+            inputHandler={inputHandler}
+          />
         </div>
-        {listItems}
       </div>
     </section>
   );

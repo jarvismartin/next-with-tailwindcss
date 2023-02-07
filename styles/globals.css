@@ -17,3 +17,24 @@ main {
   height: calc(100vh - 65px);
   margin-top: 65px;
 }
+
+/* Grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "header header header header header"
+    "body body body body body";
+}
+.row {
+  display: contents;
+}
+.row .name {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.radio:checked {
+  box-shadow: 0 0 0 4px #70c4bb inset, 0 0 0 4px #70c4bb inset;
+}
