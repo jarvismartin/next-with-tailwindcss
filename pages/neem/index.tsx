@@ -47,11 +47,13 @@ const household = [
 //     props: { household },
 //   };
 // };
-Neem.getInitialProps = async () => {
+Neem.getStaticProps = async () => {
   // Fake fetch
   // const res = await fetch(url);
   // const json = await res.json();
-  return { household };
+  return {
+    props: { household },
+  };
 };
 
 interface Props {
